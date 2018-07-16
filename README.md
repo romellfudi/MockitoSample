@@ -16,6 +16,7 @@ Primero debemos configurar todas nuestras dependencias, creando una extensión e
 - La libraría SharePreferenceLib(para almacenamiento en disco)
 - La libraría Glide para estructuras de datos
 - Junit, mockito, hamcrest & powermock para la creación y ejecución de pruebas unitarias
+
 ![center](snapshot/b.png)
 
 ![center](snapshot/c.png)
