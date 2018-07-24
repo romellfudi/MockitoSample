@@ -1,6 +1,7 @@
 # Mockito Sample Project
 
 ### by Romell Domínguez
+[![](snapshot/icono.png)](https://www.romellfudi.com/)
 
 Probar requerimientos funcionales aveces sule ser muy complejos, y si no sabes hacer pruebas unitarias o recién estas comenzando se vuelve demasiado 'tóxico' usarlo de manera inapropiada, por ello presento este app donde manejo la construcción de casos de pruebas.
 
