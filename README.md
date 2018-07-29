@@ -18,6 +18,14 @@ Primero debemos configurar todas nuestras dependencias, creando una extensión e
 - La libraría Glide para estructuras de datos
 - Junit, mockito, hamcrest & powermock para la creación y ejecución de pruebas unitarias
 
+<style>
+img[src*='#center'] { 
+    width:500px;
+    display: block;
+    margin: auto;
+}
+</style>
+
 ![center](snapshot/b.png)
 
 ![center](snapshot/c.png)
