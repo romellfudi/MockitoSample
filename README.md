@@ -26,9 +26,9 @@ img[src*='#center'] {
 }
 </style>
 
-![center](snapshot/b.png)
+![center](snapshot/b.png#center)
 
-![center](snapshot/c.png)
+![center](snapshot/c.png#center)
 
 ## Lets Coooode! 
 
@@ -100,9 +100,9 @@ Primero validamos que nuestro objeto valor se almacene y se pueda recuperar, y s
 
 Una vez creados los casos de pruebas, los ejecutamos normalmente
 
-![center](snapshot/a.png)
+![center](snapshot/a.png#center)
 
-![center](snapshot/e.png) 
+![center](snapshot/e.png#center) 
 
 Como se puede apreciar las pruebas se ejecutaron con total normalidad.
 
