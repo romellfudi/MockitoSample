@@ -18,9 +18,13 @@ First we add dependecies at gradle config project file:
 - Glide library for structure data
 - Junit, mockito, hamcrest & powermock for testing
 
-![center](snapshot/b.png#center)
-
-![center](snapshot/c.png#center)
+```groovy
+glideVersion = '3.6.1'
+junitVersion = '4.12'
+mockitoVersion = '1.10.19'
+powerMockito = '1.6.2'
+hamcrestVersion = '1.3'
+```
 
 ## Lets Coooode! 
 

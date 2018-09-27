@@ -18,9 +18,13 @@ Primero debemos configurar todas nuestras dependencias, creando una extensión e
 - La libraría Glide para estructuras de datos
 - Junit, mockito, hamcrest & powermock para la creación y ejecución de pruebas unitarias
 
-![center](snapshot/b.png#center)
-
-![center](snapshot/c.png#center)
+```groovy
+glideVersion = '3.6.1'
+junitVersion = '4.12'
+mockitoVersion = '1.10.19'
+powerMockito = '1.6.2'
+hamcrestVersion = '1.3'
+```
 
 ## Lets Coooode! 
 
