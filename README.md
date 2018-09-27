@@ -3,28 +3,20 @@
 ### by Romell Domínguez
 [![](snapshot/icono.png)](https://www.romellfudi.com/)
 
-Probar requerimientos funcionales aveces sule ser muy complejos, y si no sabes hacer pruebas unitarias o recién estas comenzando se vuelve demasiado 'tóxico' usarlo de manera inapropiada, por ello presento este app donde manejo la construcción de casos de pruebas.
+Sometimes test functional requirements its very complex, if you don't know how test your code, 'mock' interface components, you gonna go toxic way from implements test unit cases. Hope use This project for begging write excellent codes
 
-**No entraré en detalles tecnicos únicamente en la configuración del proyecto android**
+**Won't explain technical details about the configuration of the project android**
 
-Las pruebas unitarias fueron trabajadas con  Mockito 1.10.*
+All Testing are working using  Mockito 1.10.* dependency
 
 [![center](snapshot/mockito.png)](https://github.com/mockito/mockito)
 
-Primero debemos configurar todas nuestras dependencias, creando una extensión en nuestro gradle del proyecto y del módulo.
+First we add dependecies at gradle config project file:
 
-- Las librerías Permissionlib(para permisos requests apartir de Android 5):
-- La libraría SharePreferenceLib(para almacenamiento en disco)
-- La libraría Glide para estructuras de datos
-- Junit, mockito, hamcrest & powermock para la creación y ejecución de pruebas unitarias
-
-<style>
-img[src*='#center'] { 
-    width:500px;
-    display: block;
-    margin: auto;
-}
-</style>
+- Permission library (for request permissions at Android 5):
+- SharePreferenceLib library (save internal memory)
+- Glide library for structure data
+- Junit, mockito, hamcrest & powermock for testing
 
 ![center](snapshot/b.png#center)
 
@@ -32,11 +24,11 @@ img[src*='#center'] {
 
 ## Lets Coooode! 
 
-En nuestra clase test CameraUnitTest, declaramos variables de pruebas : 
-1.  Manejamos una referencia a nuestra interfaz Camara, la cual vamos a probar (hacer los caminos de ejecución)
-2.  Un objeto inicializador, deacuerdo al patrón MVP será nuestro **P**resentador Camara
-3.  Un objeto de tipo ArgumentCaptor para obtener la información que ha sido vínculada a nuestro objeto mock
-4.  He incializar la libraría de prueba
+At CameraUnitTest testing class, declare variables: 
+1.  A mock reference to interface **V**iew class Camera, whole be testing to make all possible workflows(coverage testing)
+2.  An inject mock object (not reference), **P**resenter class camera to intialize our workflow paths
+3.  An object parametrizable ArgumentCaptor class using String class for catch the response 
+4.  A intialize method Mockito workspace run each workflow path
 
 ```java
     @Mock
@@ -54,8 +46,8 @@ En nuestra clase test CameraUnitTest, declaramos variables de pruebas :
     }
 ```
 
-### Construcción de la JunitTestCase
-En síntesis se requiere probar que la toma realizada sea capturada, visualizada(display) y eliminada. Asegurandonos que sea efectivamente la misma foto capturada desde el inicio
+### Build a JunitTestCase
+In syntexis the requirement need testing a case whose capture a picture, the realized pic is captured, visualized (display) and eliminated (remove in memory). Assuring that should be really(exactly) the same photo captured from the beginning.
 
 ```java
     @Test
@@ -76,11 +68,11 @@ En síntesis se requiere probar que la toma realizada sea capturada, visualizada
 
     }
 ```
-Como puede darse cuenta, nuestro objeto *captorString* permite captura el objeto pasado internamente durante el flujo de *takePicture*
-De la misma manera verificamos que sea la misma al ser cargada por *viewPicture* 
-Pero para eliminar la captura, únicamente verificamos la visualización de la imagen por defecto: mediante la pregunta si el métoto *showDefaultPicture* fue invocado por la vista. 
+Oblivious `captorString` allow catch the `takePicture` object
+Same way we check that it is the same on having been loaded for `viewPicture`
+But if remove that pic, just verificate whetere the presenter is displaying a default picture by using  `showDefaultPicture` method
 
-Un segundo ejemplo, un caso de prueba para nuestra clase SharePreference:
+A second example, need testing save/load pic from  our SharePreference class, creating `saveload` unit test:
 
 ```java
     @Test
@@ -96,14 +88,22 @@ Un segundo ejemplo, un caso de prueba para nuestra clase SharePreference:
     }
 ```
 
-Primero validamos que nuestro objeto valor se almacene y se pueda recuperar, y segundo validamos que en nuestra vista(shareView) este obteniendo los valores almacenadores en memoria(repository), note que no exíste una referencia directa en nuestro código de prueba
+First, we validate that our object value stores and if could recover, and second we validate that in our survey, this one obtaining the values storing in `repository` memory, notice that not exist a direct reference in our code of unit test
 
-Una vez creados los casos de pruebas, los ejecutamos normalmente
+When all test cases had been coded, Go run:
 
 ![center](snapshot/a.png#center)
 
 ![center](snapshot/e.png#center) 
 
-Como se puede apreciar las pruebas se ejecutaron con total normalidad.
+As seen all testing had been run, passed successful
 
-**Ojo en ningún momento pasamos la referencia de la vista(cameraView) al presentador(cameraPresenter) o el repositorio sharePreference(repository) a la vista (shareView), esta es la gran ventaja de mockito: PERMITE CAPTURAR INTERFACES CON ÚNICAMENTE USANDO EL NOMBRE EXACTO DE LA VARIABLE INTERFAZ USADA**
+**NOTICE never we pass a reference of `cameraView` to the `cameraPresenter` presenter or the  `repository` sharePreference at `shareView`, this one is the great advantage of mockito: IT ALLOWS TO CAPTURE INTERFACES WITH ONLY USING THE EXACT NAME OF THE INTERFACE VARIABLE USED IT**
+
+<style>
+img[src*='#center'] { 
+    width:500px;
+    display: block;
+    margin: auto;
+}
+</style>
