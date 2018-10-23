@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    compile "com.romellfudi.permission:fudi-store:$rootProject.store"
+    compile "com.romellfudi.store:fudi-store:$rootProject.store"
     compile "com.romellfudi.permission:fudi-permission:$rootProject.permission"
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
