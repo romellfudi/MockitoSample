@@ -23,6 +23,10 @@ allprojects {
 }
 
 ext {
+    // RomellFudi libraries
+    permission = '1.0.a'
+    store = '1.0.a'
+
     // Sdk and tools
     minSdkVersion = 10
     targetSdkVersion = 22

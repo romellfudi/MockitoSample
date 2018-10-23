@@ -1,7 +1,7 @@
 package fudi.freddy.mokitosample.store;
 
 import fudi.freddy.mokitosample.model.Contact;
-import fudi.freddy.sharepreferencelib.SharePreferenced;
+import com.romellfudi.sharepreference.SharePreferenced;
 
 /**
  * @autor Romell Domínguez

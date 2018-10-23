@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import fudi.freddy.mokitosample.camera.CameraFragment;
 import fudi.freddy.mokitosample.mvp_sevice.SecondAct;
-import fudi.freddy.permission.PermissionService;
+import com.romellfudi.permission.PermissionService;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 

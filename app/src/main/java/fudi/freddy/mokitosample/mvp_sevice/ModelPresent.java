@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
-import fudi.freddy.sharepreferencelib.SharePreferenced;
+import com.romellfudi.sharepreference.SharePreferenced;
 
 
 /**

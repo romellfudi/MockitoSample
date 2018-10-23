@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import fudi.freddy.mokitosample.store.DatabaseHelper;
-import fudi.freddy.sharepreferencelib.SharePreferenced;
+import com.romellfudi.sharepreference.SharePreferenced;
 
 /**
  * @version 1.0

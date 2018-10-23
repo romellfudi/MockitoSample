@@ -8,7 +8,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import fudi.freddy.sharepreferencelib.SharePreferenced;
+import com.romellfudi.sharepreference.SharePreferenced;
 
 /**
  * @version 1.0
