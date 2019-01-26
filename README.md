@@ -2,7 +2,7 @@
 [![](https://img.shields.io/badge/language-ES-blue.svg)](./README.es)
 
 ### by Romell Domínguez
-[![](snapshot/icono.png)](https://www.romellfudi.com/)
+[![](https://raw.githubusercontent.com/romellfudi/assets/master/favicon.ico)](https://www.romellfudi.com/)
 
 Sometimes test functional requirements its very complex, if you don't know how test your code, 'mock' interface components, you gonna go toxic way from implements test unit cases. Hope use This project for begging write excellent codes
 
