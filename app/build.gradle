@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion 28
     defaultConfig {
         applicationId "fudi.freddy.mokitosample"
         minSdkVersion 17
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -36,19 +35,18 @@ android {
 }
 
 dependencies {
-    compile "com.romellfudi.store:fudi-store:$rootProject.store"
-    compile "com.romellfudi.permission:fudi-permission:$rootProject.permission"
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation "com.romellfudi.store:fudi-store:$rootProject.store"
+    implementation "com.romellfudi.permission:fudi-permission:$rootProject.permission"
+    implementation 'com.android.support:appcompat-v7:28.+'
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     // Dependencies for local unit tests
-    testCompile "junit:junit:$rootProject.ext.junitVersion"
-    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
-    testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
-    testCompile "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
-    testCompile "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
-
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
+    testImplementation "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
 
     // share Preference
-    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.7.7'
-    compile 'com.google.code.gson:gson:2.7'
+    implementation group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.7.7'
+    implementation 'com.google.code.gson:gson:2.7'
 }
