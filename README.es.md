@@ -1,6 +1,6 @@
 # Mockito Sample Project
 [![](https://img.shields.io/badge/language-EN-blue.svg)](./)
-[![CircleCi](https://img.shields.io/circleci/project/github/romellfudi/MokitoSample.svg)](https://circleci.com/gh/romellfudi/MokitoSample/tree/master)
+[![CircleCi](https://img.shields.io/circleci/project/github/romellfudi/MockitoSample.svg)](https://circleci.com/gh/romellfudi/MockitoSample/tree/master)
 
 ### by Romell Domínguez
 [![](snapshot/icono.png)](https://www.romellfudi.com/)
