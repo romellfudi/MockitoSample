@@ -1,23 +1,25 @@
 package fudi.freddy.mokitosample.camera;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
+import java.io.File;
+
+import fudi.freddy.mokitosample.BuildConfig;
 import fudi.freddy.mokitosample.R;
 
 import static android.app.Activity.RESULT_OK;
@@ -33,9 +35,6 @@ public class CameraFragment extends Fragment implements CameraContract.CameraVie
 
     CameraPresenter cameraPresenter;
 
-    private CameraFragment() {
-    }
-
     public static Fragment getInstance() {
         return new CameraFragment();
     }
@@ -48,7 +47,7 @@ public class CameraFragment extends Fragment implements CameraContract.CameraVie
 
     Button button;
     ImageView imageView;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 123;
 
     @Nullable
     @Override
@@ -68,33 +67,24 @@ public class CameraFragment extends Fragment implements CameraContract.CameraVie
     @Override
     public void loadPicture(String path) {
         Glide.with(this)
-                .load(path)
+                .load(new File(path))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
-                .into(new GlideDrawableImageViewTarget(imageView) {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource,
-                                                GlideAnimation<? super GlideDrawable> animation) {
-                        super.onResourceReady(resource, animation);
-                    }
-                });
-//        imageView.setImageBitmap(path);
+                .into(imageView);
     }
 
     @Override
     public void showDefaultPicture() {
-        imageView.setImageBitmap(null);
+        Glide.with(this).load(R.mipmap.ic_launcher).into(imageView);
     }
 
     @Override
     public void openCamera(String path) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
-
-//                Uri photoURI = FileProvider.getUriForFile(getActivity(),
-//                        getActivity().getPackageName(),
-//                        photoFile);
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse(path));
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    FileProvider.getUriForFile(getContext(),
+                            BuildConfig.APPLICATION_ID + ".provider", new File(path)));
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
@@ -102,7 +92,6 @@ public class CameraFragment extends Fragment implements CameraContract.CameraVie
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-//            cameraPresenter.viewPicture((Bitmap) data.getExtras().get("data"));
             cameraPresenter.viewPicture();
         } else {
             cameraPresenter.viewDefaultPicture();
