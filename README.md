@@ -1,6 +1,7 @@
 # Mockito Sample Project
 [![](https://img.shields.io/badge/language-ES-blue.svg)](./README.es)
 [![CircleCi](https://img.shields.io/circleci/project/github/romellfudi/MockitoSample.svg)](https://circleci.com/gh/romellfudi/MockitoSample/tree/master)
+[![](https://github.com/romellfudi/MockitoSample/workflows/Android%20CI/badge.svg)](https://github.com/romellfudi/MockitoSample/actions)
 
 ### by Romell Domínguez
 [![](https://raw.githubusercontent.com/romellfudi/assets/master/favicon.ico)](https://www.romellfudi.com/)
