@@ -37,42 +37,38 @@ En nuestra clase test CameraUnitTest, declaramos variables de pruebas :
 3.  Un objeto de tipo ArgumentCaptor para obtener la información que ha sido vínculada a nuestro objeto mock
 4.  He incializar la libraría de prueba
 
-```java
-    @Mock
-    CameraContract.CameraView cameraView;
+```kotlin
+    @RelaxedMockK
+    lateinit var cameraView: CameraView
 
-    @InjectMocks
-    private CameraPresenter cameraPresenter = new CameraPresenter(cameraView);
+    lateinit var cameraPresenter: CameraPresenter
 
-    @Captor
-    private ArgumentCaptor<String> captorString; // object or Callback
+    val captorString = slot<String>() // object or Callback
 
-    @Before()
-    public void preparate() {
-        MockitoAnnotations.initMocks(this);
+    @Before
+    fun preparate() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
+        cameraPresenter = CameraPresenter(cameraView)
     }
 ```
 
 ### Construcción de la JunitTestCase
 En síntesis se requiere probar que la toma realizada sea capturada, visualizada(display) y eliminada. Asegurandonos que sea efectivamente la misma foto capturada desde el inicio
 
-```java
+```kotlin
     @Test
-    public void takePic() {
-        cameraPresenter.takePicture();
-        verify(cameraView, times(1)).openCamera(captorString.capture());
-        String path = captorString.getValue();
-        show(path);
-
-        cameraPresenter.viewPicture();
-        verify(cameraView, times(1)).loadPicture(captorString.capture());
-        show(captorString.getValue());
-        assertThat(captorString.getValue(),is(equalTo(path)));
-
-        cameraPresenter.pullImageFile().delete();
-        cameraPresenter.viewPicture();
-        verify(cameraView,times(1)).showDefaultPicture();
-
+    fun takePic() {
+        cameraPresenter.takePicture()
+        verify { cameraView.openCamera(capture(captorString)) }
+        val path = captorString.captured
+        show(path)
+        cameraPresenter.viewPicture()
+        verify(exactly = 1) { cameraView.loadPicture(capture(captorString)) }
+        show(captorString.captured)
+        assertThat(captorString.captured, equalTo(path))
+        cameraPresenter.pullImageFile()!!.delete()
+        cameraPresenter.viewPicture()
+        verify(exactly = 1) { cameraView.showDefaultPicture() }
     }
 ```
 Como puede darse cuenta, nuestro objeto *captorString* permite captura el objeto pasado internamente durante el flujo de *takePicture*
@@ -83,7 +79,7 @@ Un segundo ejemplo, un caso de prueba para nuestra clase SharePreference:
 
 ```kotlin
     @Test
-    public void saveLoad() {
+    fun saveLoad() {
         val toSave = "save"
         sharePresent.visibleForTesting(repository)
         sharePresent.saveInput(toSave)
