@@ -1,4 +1,4 @@
-# Mockito Sample Project
+# Mockito Sample into Android Project
 [![](https://img.shields.io/badge/language-EN-blue.svg)](./)
 [![CircleCi](https://img.shields.io/circleci/project/github/romellfudi/MockitoSample.svg)](https://circleci.com/gh/romellfudi/MockitoSample/tree/master)
 [![](https://github.com/romellfudi/MockitoSample/workflows/Android%20CI/badge.svg)](https://github.com/romellfudi/MockitoSample/actions)
@@ -81,17 +81,18 @@ Pero para eliminar la captura, únicamente verificamos la visualización de la i
 
 Un segundo ejemplo, un caso de prueba para nuestra clase SharePreference:
 
-```java
+```kotlin
     @Test
     public void saveLoad() {
-        String toSave = "save";
-        sharePresent.saveInput(toSave);
-        verify(shareView).reLoadList();
-        when(repository.load()).thenReturn(toSave);
-
-        sharePresent.loadInput();
-        verify(shareView).loadText(stringArgumentCaptor.capture());
-        assertThat(toSave,is(equalTo(stringArgumentCaptor.getValue())));
+        val toSave = "save"
+        sharePresent.visibleForTesting(repository)
+        sharePresent.saveInput(toSave)
+        verify { shareView.clearText() }
+        verify { shareView.reLoadList() }
+        `when`(repository.load()).thenReturn(toSave)
+        sharePresent.loadInput()
+        verify { shareView.loadText(capture(captorString)) }
+        assertThat(toSave, equalTo(captorString.captured))
     }
 ```
 
