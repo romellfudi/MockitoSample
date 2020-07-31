@@ -25,4 +25,11 @@ jobs:
         with:
           name: app-test
           path: app/build/reports/tests/testDebugUnitTest
+      - name: Testing app-kotlin
+        run: ./gradlew assembleDebug lint testDebugUnitTest -p app-kotlin
+      - name: Upload Testing app-kotlin
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-kotlin-test
+          path: app-kotlin/build/reports/tests/testDebugUnitTest
       
