@@ -38,38 +38,38 @@ At CameraUnitTest testing class, declare variables:
 4.  A intialize method Mockito workspace run each workflow path
 
 ```kotlin
-    @RelaxedMockK
-    lateinit var cameraView: CameraView
+@RelaxedMockK
+lateinit var cameraView: CameraView
 
-    lateinit var cameraPresenter: CameraPresenter
+lateinit var cameraPresenter: CameraPresenter
 
-    val captorString = slot<String>() // object or Callback
+val captorString = slot<String>() // object or Callback
 
-    @Before
-    fun preparate() {
-        MockKAnnotations.init(this, relaxUnitFun = true)
-        cameraPresenter = CameraPresenter(cameraView)
-    }
+@Before
+fun preparate() {
+    MockKAnnotations.init(this, relaxUnitFun = true)
+    cameraPresenter = CameraPresenter(cameraView)
+}
 ```
 
 ### Build a JunitTestCase
 In syntexis the requirement need testing a case whose capture a picture, the realized pic is captured, visualized (display) and eliminated (remove in memory). Assuring that should be really(exactly) the same photo captured from the beginning.
 
 ```kotlin
-    @Test
-    fun takePic() {
-        cameraPresenter.takePicture()
-        verify { cameraView.openCamera(capture(captorString)) }
-        val path = captorString.captured
-        show(path)
-        cameraPresenter.viewPicture()
-        verify(exactly = 1) { cameraView.loadPicture(capture(captorString)) }
-        show(captorString.captured)
-        assertThat(captorString.captured, equalTo(path))
-        cameraPresenter.pullImageFile()!!.delete()
-        cameraPresenter.viewPicture()
-        verify(exactly = 1) { cameraView.showDefaultPicture() }
-    }
+@Test
+fun takePic() {
+    cameraPresenter.takePicture()
+    verify { cameraView.openCamera(capture(captorString)) }
+    val path = captorString.captured
+    show(path)
+    cameraPresenter.viewPicture()
+    verify(exactly = 1) { cameraView.loadPicture(capture(captorString)) }
+    show(captorString.captured)
+    assertThat(captorString.captured, equalTo(path))
+    cameraPresenter.pullImageFile()!!.delete()
+    cameraPresenter.viewPicture()
+    verify(exactly = 1) { cameraView.showDefaultPicture() }
+}
 ```
 Oblivious `captorString` allow catch the `takePicture` object
 Same way we check that it is the same on having been loaded for `viewPicture`
@@ -78,18 +78,18 @@ But if remove that pic, just verificate whetere the presenter is displaying a de
 A second example, need testing save/load pic from  our SharePreference class, creating `saveload` unit test:
 
 ```kotlin
-    @Test
-    fun saveLoad() {
-        val toSave = "save"
-        sharePresent.visibleForTesting(repository)
-        sharePresent.saveInput(toSave)
-        verify { shareView.clearText() }
-        verify { shareView.reLoadList() }
-        `when`(repository.load()).thenReturn(toSave)
-        sharePresent.loadInput()
-        verify { shareView.loadText(capture(captorString)) }
-        assertThat(toSave, equalTo(captorString.captured))
-    }
+@Test
+fun saveLoad() {
+    val toSave = "save"
+    sharePresent.visibleForTesting(repository)
+    sharePresent.saveInput(toSave)
+    verify { shareView.clearText() }
+    verify { shareView.reLoadList() }
+    `when`(repository.load()).thenReturn(toSave)
+    sharePresent.loadInput()
+    verify { shareView.loadText(capture(captorString)) }
+    assertThat(toSave, equalTo(captorString.captured))
+}
 ```
 
 First, we validate that our object value stores and if could recover, and second we validate that in our survey, this one obtaining the values storing in `repository` memory, notice that not exist a direct reference in our code of unit test

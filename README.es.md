@@ -38,38 +38,38 @@ En nuestra clase test CameraUnitTest, declaramos variables de pruebas :
 4.  He incializar la libraría de prueba
 
 ```kotlin
-    @RelaxedMockK
-    lateinit var cameraView: CameraView
+@RelaxedMockK
+lateinit var cameraView: CameraView
 
-    lateinit var cameraPresenter: CameraPresenter
+lateinit var cameraPresenter: CameraPresenter
 
-    val captorString = slot<String>() // object or Callback
+val captorString = slot<String>() // object or Callback
 
-    @Before
-    fun preparate() {
-        MockKAnnotations.init(this, relaxUnitFun = true)
-        cameraPresenter = CameraPresenter(cameraView)
-    }
+@Before
+fun preparate() {
+    MockKAnnotations.init(this, relaxUnitFun = true)
+    cameraPresenter = CameraPresenter(cameraView)
+}
 ```
 
 ### Construcción de la JunitTestCase
 En síntesis se requiere probar que la toma realizada sea capturada, visualizada(display) y eliminada. Asegurandonos que sea efectivamente la misma foto capturada desde el inicio
 
 ```kotlin
-    @Test
-    fun takePic() {
-        cameraPresenter.takePicture()
-        verify { cameraView.openCamera(capture(captorString)) }
-        val path = captorString.captured
-        show(path)
-        cameraPresenter.viewPicture()
-        verify(exactly = 1) { cameraView.loadPicture(capture(captorString)) }
-        show(captorString.captured)
-        assertThat(captorString.captured, equalTo(path))
-        cameraPresenter.pullImageFile()!!.delete()
-        cameraPresenter.viewPicture()
-        verify(exactly = 1) { cameraView.showDefaultPicture() }
-    }
+@Test
+fun takePic() {
+    cameraPresenter.takePicture()
+    verify { cameraView.openCamera(capture(captorString)) }
+    val path = captorString.captured
+    show(path)
+    cameraPresenter.viewPicture()
+    verify(exactly = 1) { cameraView.loadPicture(capture(captorString)) }
+    show(captorString.captured)
+    assertThat(captorString.captured, equalTo(path))
+    cameraPresenter.pullImageFile()!!.delete()
+    cameraPresenter.viewPicture()
+    verify(exactly = 1) { cameraView.showDefaultPicture() }
+}
 ```
 Como puede darse cuenta, nuestro objeto *captorString* permite captura el objeto pasado internamente durante el flujo de *takePicture*
 De la misma manera verificamos que sea la misma al ser cargada por *viewPicture* 
@@ -78,18 +78,18 @@ Pero para eliminar la captura, únicamente verificamos la visualización de la i
 Un segundo ejemplo, un caso de prueba para nuestra clase SharePreference:
 
 ```kotlin
-    @Test
-    fun saveLoad() {
-        val toSave = "save"
-        sharePresent.visibleForTesting(repository)
-        sharePresent.saveInput(toSave)
-        verify { shareView.clearText() }
-        verify { shareView.reLoadList() }
-        `when`(repository.load()).thenReturn(toSave)
-        sharePresent.loadInput()
-        verify { shareView.loadText(capture(captorString)) }
-        assertThat(toSave, equalTo(captorString.captured))
-    }
+@Test
+fun saveLoad() {
+    val toSave = "save"
+    sharePresent.visibleForTesting(repository)
+    sharePresent.saveInput(toSave)
+    verify { shareView.clearText() }
+    verify { shareView.reLoadList() }
+    `when`(repository.load()).thenReturn(toSave)
+    sharePresent.loadInput()
+    verify { shareView.loadText(capture(captorString)) }
+    assertThat(toSave, equalTo(captorString.captured))
+}
 ```
 
 Primero validamos que nuestro objeto valor se almacene y se pueda recuperar, y segundo validamos que en nuestra vista(shareView) este obteniendo los valores almacenadores en memoria(repository), note que no exíste una referencia directa en nuestro código de prueba
