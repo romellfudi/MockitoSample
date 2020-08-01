@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./index_files/css">
   <link rel="stylesheet" href="./index_files/icon">
   <link rel="stylesheet" href="./index_files/codelab-elements.css">
+  <link rel="stylesheet" href="./index_files/prettify.css">
   <style>
     .success {
       color: #1e8e3e;
@@ -16,15 +17,15 @@
       color: red;
     }
   </style>
-</head>
+<style></style></head>
 <body class="vsc-initialized">
-  <google-codelab id="https://github.com/romellfudi/MockitoSample" environment="web" feedback-link="https://github.com/romellfudi/MockitoSample/issues" selected="0" google-codelab-ready="" codelab-title="Mockito Sample"><div id="drawer"><div class="codelab-time-container" style="display: none;"></div><div class="steps"><ol><li completed="" selected=""><a href="#0"><span class="step"><span>Introduction</span></span></a></li><li><a href="#1"><span class="step"><span>Lets Coooode!</span></span></a></li><li><a href="#2"><span class="step"><span>Build JunitTestCases</span></span></a></li><li><a href="#3"><span class="step"><span>Run JunitTestCases</span></span></a></li><li><a href="#4"><span class="step"><span>License</span></span></a></li></ol></div><div class="metadata"><a target="_blank" href="https://github.com/romellfudi/MockitoSample/issues"><i class="material-icons">bug_report</i> Report a mistake</a></div></div><div id="codelab-title"><div id="codelab-nav-buttons"><a href="https://codelabs-preview.appspot.com/" id="arrow-back"><i class="material-icons">close</i></a><a href="#" id="menu"><i class="material-icons">menu</i></a></div><h1 class="title">Mockito Sample</h1><div class="codelab-time-container" style="display: none;"></div><devsite-user></devsite-user></div><div id="main"><div id="steps"><google-codelab-step label="Introduction" duration="5" step="1" ><h2 is-upgraded="" class="step-title">1. Introduction</h2>
+  <google-codelab id="https://github.com/romellfudi/MockitoSample" environment="web" feedback-link="https://github.com/romellfudi/MockitoSample/issues" selected="0" google-codelab-ready="" codelab-title="Mockito Sample"><div id="drawer"><div class="codelab-time-container" style="display: none;"></div><div class="steps"><ol><li completed="" selected=""><a href="#0"><span class="step"><span>Introduction</span></span></a></li><li><a href="#1"><span class="step"><span>Lets Coooode!</span></span></a></li><li><a href="#2"><span class="step"><span>Build JunitTestCases</span></span></a></li><li><a href="#3"><span class="step"><span>Run JunitTestCases</span></span></a></li><li><a href="#4"><span class="step"><span>License</span></span></a></li></ol></div><div class="metadata"><a target="_blank" href="https://github.com/romellfudi/MockitoSample/issues"><i class="material-icons">bug_report</i> Report a mistake</a></div></div><div id="codelab-title"><div id="codelab-nav-buttons"><a href="https://codelabs-preview.appspot.com/" id="arrow-back"><i class="material-icons">close</i></a><a href="#" id="menu"><i class="material-icons">menu</i></a></div><h1 class="title">Mockito Sample</h1><div class="codelab-time-container" style="display: none;"></div><devsite-user></devsite-user></div><div id="main"><div id="steps"><google-codelab-step label="Introduction" duration="3" step="1" ><h2 is-upgraded="" class="step-title">1. Introduction</h2>
         <p>Sometimes test functional requirements are very complex, if you don't know how test your code, <strong><code>mock</code></strong> interface components, you gonna go toxic way from implements test unit cases. Hope use This project for begging write excellent codes</p>
 <aside class="warning"><p>Won't explain technical details about the configuration of the project android.</p>
 </aside>
 <p>All Testing are working using  <a href="https://site.mockito.org/" target="_blank">Mockito</a> 1.10.* dependency</p>
-<p class="image-container"><img style="width: 194.00px" src="./index_files/Mockito.png"></p>
-<h2 is-upgraded="">A<strong>dd dependencies on gradle config project file</strong></h2>
+<p class="image-container"><img style="width: 194.00px" src="./index_files/mockito.png"></p>
+<h2>A<strong>dd dependencies on gradle config project file</strong></h2>
 <ul>
 <li>Permission library (for request permissions at Android 5)</li>
 <li>SharePreferenceLib library (save internal memory)</li>
@@ -39,79 +40,77 @@ powerMockito </span><span class="pun">=</span><span class="pln"> </span><span cl
 hamcrestVersion </span><span class="pun">=</span><span class="pln"> </span><span class="str">'1.3'</span></code></pre>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="Lets Coooode!" duration="5" step="2"><h2 is-upgraded="" class="step-title">2. Lets Coooode!</h2>
+      </div></div></google-codelab-step><google-codelab-step label="Lets Coooode!" duration="3" step="2"><h2 is-upgraded="" class="step-title">2. Lets Coooode!</h2>
         <p>In <code>CameraUnitTest</code> testing class, declare variables: </p>
 <p>1.  A mock reference to interface <code>V</code>iew class Camera, whole be testing to make all possible workflows(coverage testing)</p>
 <p>2.  An inject mock object (not reference), <code>P</code>resenter class camera to initialize our workflow paths</p>
 <p>3.  An object parameterizable ArgumentCaptor class using String class for catch the response </p>
 <p>4.  An initialize method Mockito workspace run each workflow path</p>
-<pre><code><span class="lit">@Mock</span><span class="pln">
-</span><span class="typ">CameraContract</span><span class="pun">.</span><span class="typ">CameraView</span><span class="pln"> cameraView</span><span class="pun">;</span><span class="pln">
+<pre><code><span class="lit">@RelaxedMockK</span><span class="pln">
+lateinit </span><span class="kwd">var</span><span class="pln"> cameraView</span><span class="pun">:</span><span class="pln"> </span><span class="typ">CameraView</span><span class="pln">
 
-</span><span class="lit">@InjectMocks</span><span class="pln">
-</span><span class="kwd">private</span><span class="pln"> </span><span class="typ">CameraPresenter</span><span class="pln"> cameraPresenter </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">CameraPresenter</span><span class="pun">(</span><span class="pln">cameraView</span><span class="pun">);</span><span class="pln">
+lateinit </span><span class="kwd">var</span><span class="pln"> cameraPresenter</span><span class="pun">:</span><span class="pln"> </span><span class="typ">CameraPresenter</span><span class="pln">
 
-</span><span class="lit">@Captor</span><span class="pln">
-</span><span class="kwd">private</span><span class="pln"> </span><span class="typ">ArgumentCaptor</span><span class="pun">&lt;</span><span class="typ">String</span><span class="pun">&gt;</span><span class="pln"> captorString</span><span class="pun">;</span><span class="pln"> </span><span class="com">// object or Callback</span><span class="pln">
+val captorString </span><span class="pun">=</span><span class="pln"> slot</span><span class="pun">&lt;</span><span class="typ">String</span><span class="pun">&gt;()</span><span class="pln"> </span><span class="com">// object or Callback</span><span class="pln">
 
-</span><span class="lit">@Before</span><span class="pun">()</span><span class="pln">
-</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> preparate</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="typ">MockitoAnnotations</span><span class="pun">.</span><span class="pln">initMocks</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">);</span><span class="pln">
+</span><span class="lit">@Before</span><span class="pln">
+fun preparate</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="typ">MockKAnnotations</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> relaxUnitFun </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">)</span><span class="pln">
+    cameraPresenter </span><span class="pun">=</span><span class="pln"> </span><span class="typ">CameraPresenter</span><span class="pun">(</span><span class="pln">cameraView</span><span class="pun">)</span><span class="pln">
 </span><span class="pun">}</span></code></pre>
 <aside class="special"><p>Already load Testing architecture.</p>
 </aside>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="Build JunitTestCases" duration="5" step="3"><h2 is-upgraded="" class="step-title">3. Build JunitTestCases</h2>
+      </div></div></google-codelab-step><google-codelab-step label="Build JunitTestCases" duration="3" step="3"><h2 is-upgraded="" class="step-title">3. Build JunitTestCases</h2>
         <p>In syntexis the requirement need testing a case whose capture a picture, the realized pic is captured, <strong>visualized</strong> (<em>display</em>) and <strong>eliminated</strong> (<em>remove in memory</em>). Assuring that should be <strong>really</strong>(<em>exactly</em>) the same photo captured from the beginning.</p>
 <pre><code><span class="lit">@Test</span><span class="pln">
-</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> takePic</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    cameraPresenter</span><span class="pun">.</span><span class="pln">takePicture</span><span class="pun">();</span><span class="pln">
-    verify</span><span class="pun">(</span><span class="pln">cameraView</span><span class="pun">,</span><span class="pln"> times</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)).</span><span class="pln">openCamera</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">.</span><span class="pln">capture</span><span class="pun">());</span><span class="pln">
-    </span><span class="typ">String</span><span class="pln"> path </span><span class="pun">=</span><span class="pln"> captorString</span><span class="pun">.</span><span class="pln">getValue</span><span class="pun">();</span><span class="pln">
-    show</span><span class="pun">(</span><span class="pln">path</span><span class="pun">);</span><span class="pln">
-
-    cameraPresenter</span><span class="pun">.</span><span class="pln">viewPicture</span><span class="pun">();</span><span class="pln">
-    verify</span><span class="pun">(</span><span class="pln">cameraView</span><span class="pun">,</span><span class="pln"> times</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)).</span><span class="pln">loadPicture</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">.</span><span class="pln">capture</span><span class="pun">());</span><span class="pln">
-    show</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">.</span><span class="pln">getValue</span><span class="pun">());</span><span class="pln">
-    assertThat</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">.</span><span class="pln">getValue</span><span class="pun">(),</span><span class="pln"> </span><span class="kwd">is</span><span class="pun">(</span><span class="pln">equalTo</span><span class="pun">(</span><span class="pln">path</span><span class="pun">)));</span><span class="pln">
-
-    cameraPresenter</span><span class="pun">.</span><span class="pln">pullImageFile</span><span class="pun">().</span><span class="kwd">delete</span><span class="pun">();</span><span class="pln">
-    cameraPresenter</span><span class="pun">.</span><span class="pln">viewPicture</span><span class="pun">();</span><span class="pln">
-    verify</span><span class="pun">(</span><span class="pln">cameraView</span><span class="pun">,</span><span class="pln"> times</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)).</span><span class="pln">showDefaultPicture</span><span class="pun">();</span><span class="pln">
+fun takePic</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    cameraPresenter</span><span class="pun">.</span><span class="pln">takePicture</span><span class="pun">()</span><span class="pln">
+    verify </span><span class="pun">{</span><span class="pln"> cameraView</span><span class="pun">.</span><span class="pln">openCamera</span><span class="pun">(</span><span class="pln">capture</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">))</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+    val path </span><span class="pun">=</span><span class="pln"> captorString</span><span class="pun">.</span><span class="pln">captured
+    show</span><span class="pun">(</span><span class="pln">path</span><span class="pun">)</span><span class="pln">
+    cameraPresenter</span><span class="pun">.</span><span class="pln">viewPicture</span><span class="pun">()</span><span class="pln">
+    verify</span><span class="pun">(</span><span class="pln">exactly </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> cameraView</span><span class="pun">.</span><span class="pln">loadPicture</span><span class="pun">(</span><span class="pln">capture</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">))</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+    show</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">.</span><span class="pln">captured</span><span class="pun">)</span><span class="pln">
+    assertThat</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">.</span><span class="pln">captured</span><span class="pun">,</span><span class="pln"> equalTo</span><span class="pun">(</span><span class="pln">path</span><span class="pun">))</span><span class="pln">
+    cameraPresenter</span><span class="pun">.</span><span class="pln">pullImageFile</span><span class="pun">()!!.</span><span class="kwd">delete</span><span class="pun">()</span><span class="pln">
+    cameraPresenter</span><span class="pun">.</span><span class="pln">viewPicture</span><span class="pun">()</span><span class="pln">
+    verify</span><span class="pun">(</span><span class="pln">exactly </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> cameraView</span><span class="pun">.</span><span class="pln">showDefaultPicture</span><span class="pun">()</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
 </span><span class="pun">}</span></code></pre>
 <p>Oblivious <code>captorString</code> allow catch the <code>takePicture</code> object</p>
 <p>Same way we check that it is the same on having been loaded for <code>viewPicture</code></p>
 <p>But if remove that pic, just verificate whether the presenter is displaying a default picture by using  <code>showDefaultPicture</code> method.</p>
 <p>A second example, need testing save/load pic from  our <code>SharePreference</code> class, creating <code>saveload</code> unit test:</p>
 <pre><code><span class="lit">@Test</span><span class="pln">
-</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> saveLoad</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-    </span><span class="typ">String</span><span class="pln"> toSave </span><span class="pun">=</span><span class="pln"> </span><span class="str">"save"</span><span class="pun">;</span><span class="pln">
-    sharePresent</span><span class="pun">.</span><span class="pln">saveInput</span><span class="pun">(</span><span class="pln">toSave</span><span class="pun">);</span><span class="pln">
-    verify</span><span class="pun">(</span><span class="pln">shareView</span><span class="pun">).</span><span class="pln">reLoadList</span><span class="pun">();</span><span class="pln">
-    </span><span class="kwd">when</span><span class="pun">(</span><span class="pln">repository</span><span class="pun">.</span><span class="pln">load</span><span class="pun">()).</span><span class="pln">thenReturn</span><span class="pun">(</span><span class="pln">toSave</span><span class="pun">);</span><span class="pln">
-
-    sharePresent</span><span class="pun">.</span><span class="pln">loadInput</span><span class="pun">();</span><span class="pln">
-    verify</span><span class="pun">(</span><span class="pln">shareView</span><span class="pun">).</span><span class="pln">loadText</span><span class="pun">(</span><span class="pln">stringArgumentCaptor</span><span class="pun">.</span><span class="pln">capture</span><span class="pun">());</span><span class="pln">
-    assertThat</span><span class="pun">(</span><span class="pln">toSave</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">is</span><span class="pun">(</span><span class="pln">equalTo</span><span class="pun">(</span><span class="pln">stringArgumentCaptor</span><span class="pun">.</span><span class="pln">getValue</span><span class="pun">())));</span><span class="pln">
+fun saveLoad</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    val toSave </span><span class="pun">=</span><span class="pln"> </span><span class="str">"save"</span><span class="pln">
+    sharePresent</span><span class="pun">.</span><span class="pln">visibleForTesting</span><span class="pun">(</span><span class="pln">repository</span><span class="pun">)</span><span class="pln">
+    sharePresent</span><span class="pun">.</span><span class="pln">saveInput</span><span class="pun">(</span><span class="pln">toSave</span><span class="pun">)</span><span class="pln">
+    verify </span><span class="pun">{</span><span class="pln"> shareView</span><span class="pun">.</span><span class="pln">clearText</span><span class="pun">()</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+    verify </span><span class="pun">{</span><span class="pln"> shareView</span><span class="pun">.</span><span class="pln">reLoadList</span><span class="pun">()</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+    </span><span class="str">`when`</span><span class="pun">(</span><span class="pln">repository</span><span class="pun">.</span><span class="pln">load</span><span class="pun">()).</span><span class="pln">thenReturn</span><span class="pun">(</span><span class="pln">toSave</span><span class="pun">)</span><span class="pln">
+    sharePresent</span><span class="pun">.</span><span class="pln">loadInput</span><span class="pun">()</span><span class="pln">
+    verify </span><span class="pun">{</span><span class="pln"> shareView</span><span class="pun">.</span><span class="pln">loadText</span><span class="pun">(</span><span class="pln">capture</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">))</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+    assertThat</span><span class="pun">(</span><span class="pln">toSave</span><span class="pun">,</span><span class="pln"> equalTo</span><span class="pun">(</span><span class="pln">captorString</span><span class="pun">.</span><span class="pln">captured</span><span class="pun">))</span><span class="pln">
 </span><span class="pun">}</span></code></pre>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="Run JunitTestCases" duration="5" step="4"><h2 is-upgraded="" class="step-title">4. Run JunitTestCases</h2>
+      </div></div></google-codelab-step><google-codelab-step label="Run JunitTestCases" duration="3" step="4"><h2 is-upgraded="" class="step-title">4. Run JunitTestCases</h2>
         <p>First, we validate that our object value stores and if could recover, and second we validate that in our survey, this one obtaining the values storing in `repository` memory, notice that not exist a direct reference in our code of unit test</p>
 <p>When all test cases had been coded, Go run:</p>
 <p class="image-container"><img style="width: 432.00px" src="./index_files/a.png"></p>
 <p class="image-container"><img style="width: 624.00px" src="./index_files/e.png"></p>
-<h2 is-upgraded=""> </h2>
+<h2> </h2>
 <aside class="special"><p>As seen all testing had been run, passed successful.</p>
 </aside>
 <aside class="warning"><p>NOTICE never we pass a reference of <code>cameraView</code> to the <code>cameraPresenter</code> presenter or the  <code>repository</code> sharePreference at <code>shareView</code>, this one is the great advantage of mockito: <strong>IT ALLOWS TO CAPTURE INTERFACES WITH ONLY USING THE EXACT NAME OF THE INTERFACE VARIABLE USED IT</strong>.</p>
 </aside>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="License" duration="5" step="5"><h2 is-upgraded="" class="step-title">5. License</h2>
-        <h2 is-upgraded=""><strong>by Romell Domínguez</strong></h2>
-<p class="image-container"><a href="http://portfolio.romellfudi.com"><img style="width: 287.00px" src="./index_files/icono.png"></a></p>
+      </div></div></google-codelab-step><google-codelab-step label="License" duration="3" step="5"><h2 is-upgraded="" class="step-title">5. License</h2>
+        <h2><strong>by Romell Domínguez</strong></h2>
+<p class="image-container"><img style="width: 287.00px" src="./index_files/icono.png"></p>
 <p>Copyright 2018 Romell D.Z.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
 <p>http://www.apache.org/licenses/LICENSE-2.0</p>
@@ -171,6 +170,7 @@ hamcrestVersion </span><span class="pun">=</span><span class="pln"> </span><span
   <script src="./index_files/custom-elements.min.js"></script>
   <script src="./index_files/prettify.js"></script>
   <script src="./index_files/codelab-elements.js"></script>
+  <script src="./index_files/api.js"></script>
 
 
 </body></html>
