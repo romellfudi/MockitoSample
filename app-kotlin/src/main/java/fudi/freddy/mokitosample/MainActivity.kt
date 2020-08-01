@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 
     private var permisos: PermissionService.Callback = object : PermissionService.Callback() {
         override fun onResponse(refusePermissions: ArrayList<String>?) {
-            views()
+            if(!refusePermissions.isNullOrEmpty())
+                views()
         }
     }
 
